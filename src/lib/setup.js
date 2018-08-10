@@ -65,6 +65,8 @@ const {
   SESSION_SECRET,
   DD_API_KEY,
   DD_APM_ENABLED,
+  DD_TRACER_HOSTNAME,
+  DD_TRACER_SERVICE_NAME,
 } = config
 
 export default function(app) {
@@ -220,7 +222,9 @@ export default function(app) {
   if (DD_API_KEY && DD_APM_ENABLED) {
     // DataDog automatically hooks into Express
     // https://datadog.github.io/dd-trace-js/index.html
-    ddTracer.init({ service: 'force' })
+    // and we use all the defaults from:
+    // https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#tracer-settings
+    ddTracer.init({})
   }
 
   // Sets up mobile marketing signup modal
